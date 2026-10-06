@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 const HomePageLayout = () => {
   return (
-    <div className='w-screen'>
+    <div className=''>
         <Navbar/>
         <Outlet/>
     </div>

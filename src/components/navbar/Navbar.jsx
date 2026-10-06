@@ -22,17 +22,8 @@ const Navbar=()=> {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/95 backdrop-blur-md">
-      {/* Top announcement bar */}
-      <div className="bg-slate-900 px-4 py-2 text-center text-sm font-medium text-white">
-        <span>
-          Free shipping on orders over{" "}
-          <span className="font-semibold text-orange-400">$75</span>
-        </span>
-      </div>
-
-      {/* Main Navbar */}
-      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+   <div>
+       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link
           to="/"
@@ -238,8 +229,7 @@ const Navbar=()=> {
         </div>
       )}
 
-      
-    </header>
+   </div>
   );
 }
 

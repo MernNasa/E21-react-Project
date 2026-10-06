@@ -4,6 +4,8 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import NewArrival from "../pages/NewArrival";
+import Dashboard from "../dashboard/Dashboard";
+import PrivateRouting from "./privaterouting/PrivateRouting";
 
 export const routes = createBrowserRouter([
   {
@@ -15,9 +17,15 @@ export const routes = createBrowserRouter([
             element:<Home/>
         },
         {
-            path:"/",
+            path:"/newarrival",
             element:<NewArrival/>
         },
+        {
+          path:"/dashboard",
+          element:<PrivateRouting>
+              <Dashboard/>
+          </PrivateRouting>
+        }
     ]
   },
   {
