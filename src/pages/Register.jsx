@@ -1,4 +1,43 @@
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 const Register = () => {
+  const [userData,setUserData]=useState({
+    username:"",
+    email:"",
+    password:""
+  })
+  const navigate=useNavigate()
+
+  const handleForm=async(e)=>{
+    e.preventDefault()
+    try {
+       const {username,email,password}=userData
+       if(! username || !email || !password ){
+          toast.error("All fields are required",{position:"top-center"})
+          return
+       }
+      const {data}=await axios.post("https://6ac6467fbea0e72cf5c8ccd4.mockapi.io/users",userData)
+      setUserData({
+        username:"",
+        email:"",
+        password:""
+      })
+
+      toast.success("user register successfully.😀",{position:"top-center"})
+      navigate("/login")
+    } catch (error) {
+      console.log(error)
+      toast.error("Something went wrong. Please try later.😀")
+    }
+  }
+
+  const handleInput=(e)=>{
+    const {name,value}=e.target
+    setUserData({...userData,[name]:value})
+  }
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-8">
       <section className="w-full max-w-md rounded-2xl bg-white p-8 shadow-sm">
@@ -7,7 +46,7 @@ const Register = () => {
           Register for a ShopEase account.
         </p>
 
-        <form className="mt-6 space-y-4">
+        <form onSubmit={handleForm} className="mt-6 space-y-4">
           <div>
             <label
               htmlFor="name"
@@ -17,7 +56,9 @@ const Register = () => {
             </label>
             <input
               id="name"
-              name="name"
+              name="username"
+              value={userData.username}
+              onChange={handleInput}
               type="text"
               autoComplete="name"
               required
@@ -36,6 +77,8 @@ const Register = () => {
               id="email"
               name="email"
               type="email"
+              value={userData.email}
+              onChange={handleInput}
               autoComplete="email"
               required
               className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-orange-400 focus:ring-4 focus:ring-orange-500/10"
@@ -53,8 +96,10 @@ const Register = () => {
               id="password"
               name="password"
               type="password"
+              value={userData.password}
+              onChange={handleInput}
               autoComplete="new-password"
-              required
+              
               className="h-11 w-full rounded-xl border border-slate-200 px-3 text-sm outline-none focus:border-orange-400 focus:ring-4 focus:ring-orange-500/10"
             />
           </div>
