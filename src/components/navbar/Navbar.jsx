@@ -7,8 +7,8 @@ import {
   X,
   ChevronDown,
 } from "lucide-react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const categories = [
   "Men",
@@ -20,10 +20,25 @@ const categories = [
 
 const Navbar=()=> {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [auth,setAuth]=useState(false)
+  const navigate=useNavigate()
+  useEffect(()=>{
+    let token=JSON.parse(localStorage.getItem("jwt_token"))
+    if(token){
+      setAuth(true)
+    }
+  },[])
+
+  const handleLogout=()=>{
+    localStorage.removeItem("jwt_token")
+    navigate("/")
+    setAuth(false)
+  }
+
 
   return (
-   <div>
-       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+   <div className="w-full shadow">
+       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 ">
         {/* Logo */}
         <Link
           to="/"
@@ -130,16 +145,7 @@ const Navbar=()=> {
               2
             </span>
           </button>
-
-          {/* Login */}
-          <Link
-            to="/login"
-            className="hidden items-center rounded-xl border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-orange-500 hover:text-orange-500 sm:flex"
-          >
-            Login
-          </Link>
-
-          {/* Cart */}
+              {/* Cart */}
           <button
             className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-orange-500 text-white shadow-sm shadow-orange-500/20 transition-all hover:bg-orange-600 hover:shadow-md hover:shadow-orange-500/30"
             aria-label="Shopping cart"
@@ -150,6 +156,26 @@ const Navbar=()=> {
               3
             </span>
           </button>
+          {/* Login */}
+          {
+            !auth ? <Link
+            to="/login"
+            className=" inline-flex items-center gap-3 rounded-xl bg-orange-500 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition-all duration-300 cursor-pointer hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-500/30"
+          >
+            Login
+          </Link>
+          :
+          <button
+            
+            className=" inline-flex items-center gap-3 rounded-xl bg-orange-500 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-orange-500/20 transition-all duration-300 cursor-pointer hover:bg-orange-600 hover:shadow-xl hover:shadow-orange-500/30"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+          
+          }
+
+          
 
           {/* Mobile menu */}
           <button

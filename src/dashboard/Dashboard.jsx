@@ -1,5 +1,6 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
+import ProductCard from '../components/productCard/ProductCard'
 
 const Dashboard = () => {
     const[products,setProducts]=useState([])
@@ -11,13 +12,13 @@ const Dashboard = () => {
         fetchProducts()
     },[])
   return (
-    <div className='w-screen h-auto bg-red-300'>
-           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4  gap-6 p-4 place-items-center'>
+    <div className='w-screen h-auto'>
+           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 p-4 place-items-center'>
             { 
                 products.map((product)=>{
-                   return <div className='w-[300px] h-[250px] bg-amber-300'>
-                    
-                   </div>
+                   return <Fragment>
+                        <ProductCard product={product}/>
+                   </Fragment>
                 })
             }
            </div>
