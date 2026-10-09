@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Heart, ShoppingCart, Zap, Star, Truck } from "lucide-react";
+import { toast } from "react-toastify";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product,addtoCart }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
 
   const discountedPrice =
     product.price - (product.price * product.discountPercentage) / 100;
-
+  
   return (
     <div className="group relative w-full max-w-sm overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       
@@ -114,7 +115,7 @@ const ProductCard = ({ product }) => {
         <div className="mt-5 grid grid-cols-2 gap-3">
           
           {/* Add to Cart */}
-          <button className="flex items-center justify-center gap-2 rounded-xl border-2 border-purple-600 px-3 py-3 text-sm font-semibold text-purple-600 transition-all duration-200 hover:bg-purple-50 active:scale-95">
+          <button onClick={()=>addtoCart(product)} className="flex items-center justify-center gap-2 rounded-xl border-2 border-purple-600 px-3 py-3 text-sm font-semibold text-purple-600 transition-all duration-200 hover:bg-purple-50 active:scale-95">
             <ShoppingCart size={18} />
             Add to Cart
           </button>

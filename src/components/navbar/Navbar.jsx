@@ -37,8 +37,8 @@ const Navbar=()=> {
 
 
   return (
-   <div className="w-full shadow">
-       <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 ">
+   <div className="w-full shadow sticky top-0 z-50 bg-white">
+       <nav className="mx-auto flex h-20 max-w-7xl  items-center justify-between px-4 sm:px-6 lg:px-8 ">
         {/* Logo */}
         <Link
           to="/"
