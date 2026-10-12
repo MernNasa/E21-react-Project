@@ -3,12 +3,15 @@ import { RouterProvider } from 'react-router-dom'
 import { routes } from './routes/routes'
 import { ToastContainer } from 'react-toastify'
 import Loading from './components/loading/Loading'
+import SearchContextAPI from './contextAPI/SearchContextAPI'
 
 const App = () => {
   return (
     <>
     <Suspense fallback={<Loading/>}>
-       <RouterProvider router={routes}/>
+       <SearchContextAPI>
+        <RouterProvider router={routes}/>
+       </SearchContextAPI>
     </Suspense>
     <ToastContainer/>
     </>

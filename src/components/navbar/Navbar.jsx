@@ -7,8 +7,9 @@ import {
   X,
   ChevronDown,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { SerarchContext } from "../../contextAPI/SearchContextAPI";
 
 const categories = [
   "Men",
@@ -28,6 +29,11 @@ const Navbar=()=> {
       setAuth(true)
     }
   },[])
+    const {setSearchItem}=useContext(SerarchContext)
+  const handleSearch=(e)=>{
+    const {name,value}=e.target
+    setSearchItem(value)
+  }
 
   const handleLogout=()=>{
     localStorage.removeItem("jwt_token")
@@ -113,12 +119,14 @@ const Navbar=()=> {
           <div className="relative">
             <Search
               size={18}
+              
               className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
             />
 
             <input
               type="search"
               placeholder="Search products..."
+              onChange={handleSearch}
               className="h-11 w-full rounded-xl border border-slate-200 bg-slate-50 pl-11 pr-4 text-sm text-slate-900 outline-none transition-all placeholder:text-slate-400 focus:border-orange-400 focus:bg-white focus:ring-4 focus:ring-orange-500/10"
             />
           </div>
